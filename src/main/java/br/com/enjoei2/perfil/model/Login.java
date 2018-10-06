@@ -2,15 +2,15 @@ package br.com.enjoei2.perfil.model;
 
 public class Login {
 
-	private String login;
+	private String email;
 	private String password;
 
 	public String getLogin() {
-		return login;
+		return email;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setLogin(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {

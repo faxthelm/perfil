@@ -26,4 +26,10 @@ public class PerfilServiceImpl implements PerfilService {
 		
 	}
 
+	@Override
+	public Client retrieveClient(String clientId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

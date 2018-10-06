@@ -5,6 +5,7 @@ import java.util.Date;
 public class Client {
 
 	private String clientId;
+	private byte[] profileImage;
 	private String name;
 	private String email;
 	private String cpf;
@@ -26,6 +27,14 @@ public class Client {
 
 	public void setClientId(String clientId) {
 		this.clientId = clientId;
+	}
+
+	public byte[] getProfileImage() {
+		return profileImage;
+	}
+
+	public void setProfileImage(byte[] profileImage) {
+		this.profileImage = profileImage;
 	}
 
 	public String getName() {

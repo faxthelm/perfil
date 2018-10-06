@@ -8,5 +8,7 @@ public interface PerfilService {
 	
 	public void updateClient(Client client);
 	
-	public void removeClient(String clientId);	
+	public void removeClient(String clientId);
+	
+	public Client retrieveClient(String clientId);
 }
