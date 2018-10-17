@@ -1,9 +1,9 @@
 package br.com.enjoei2.perfil.service.impl;
 
 import br.com.enjoei2.perfil.model.CreditCard;
-import br.com.enjoei2.perfil.service.CreditCardService;
+import br.com.enjoei2.perfil.service.ICreditCardService;
 
-public class CreditCardServiceImpl implements CreditCardService{
+public class CreditCardServiceImpl implements ICreditCardService{
 
 	@Override
 	public void registerCreditCard(CreditCard creditCard) {

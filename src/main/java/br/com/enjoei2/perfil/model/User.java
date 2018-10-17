@@ -2,9 +2,9 @@ package br.com.enjoei2.perfil.model;
 
 import java.util.Date;
 
-public class Client {
+public class User {
 
-	private String clientId;
+	private String userId;
 	private byte[] profileImage;
 	private String name;
 	private String email;
@@ -15,18 +15,18 @@ public class Client {
 	private Boolean sex;
 	private String cep;
 	private String streetName;
-	private String number;
+	private String addressNumber;
 	private String complement;
 	private String neighborhood;
 	private String state;
 	private String city;
 
 	public String getClientId() {
-		return clientId;
+		return userId;
 	}
 
 	public void setClientId(String clientId) {
-		this.clientId = clientId;
+		this.userId = clientId;
 	}
 
 	public byte[] getProfileImage() {
@@ -110,11 +110,11 @@ public class Client {
 	}
 
 	public String getNumber() {
-		return number;
+		return addressNumber;
 	}
 
 	public void setNumber(String number) {
-		this.number = number;
+		this.addressNumber = number;
 	}
 
 	public String getComplement() {

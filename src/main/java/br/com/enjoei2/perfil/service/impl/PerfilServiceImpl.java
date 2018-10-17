@@ -2,20 +2,20 @@ package br.com.enjoei2.perfil.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import br.com.enjoei2.perfil.model.Client;
-import br.com.enjoei2.perfil.service.PerfilService;
+import br.com.enjoei2.perfil.model.User;
+import br.com.enjoei2.perfil.service.IPerfilService;
 
 @Service
-public class PerfilServiceImpl implements PerfilService {
+public class PerfilServiceImpl implements IPerfilService {
 
 	@Override
-	public void registerClient(Client client) {
+	public void registerClient(User client) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void updateClient(Client client) {
+	public void updateClient(User client) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -27,7 +27,7 @@ public class PerfilServiceImpl implements PerfilService {
 	}
 
 	@Override
-	public Client retrieveClient(String clientId) {
+	public User retrieveClient(String clientId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

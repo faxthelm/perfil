@@ -2,7 +2,7 @@ package br.com.enjoei2.perfil.service;
 
 import br.com.enjoei2.perfil.model.CreditCard;
 
-public interface CreditCardService {
+public interface ICreditCardService {
 
 	
 	public void registerCreditCard(CreditCard creditCard);

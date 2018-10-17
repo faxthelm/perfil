@@ -1,0 +1,39 @@
+#default project info followed by actual injected pom-specified values.
+project:
+  name: enjoei-perfil
+  version: 0.1
+  description: API de perfil para o enjoei2
+info:
+  build:
+    artifact: ${project.artifactId}
+    name: ${project.name}
+    description: ${project.description}
+    version: ${project.version}
+
+spring.jmx:
+   enabled: false
+   
+
+spring:
+    application:
+        name: perfil
+    main:
+        banner-mode: "off"
+    data:
+      postgres:
+        uri: postgres://zmrlqlswfjnquy:110fe140eeb97738cf3ba50a2f28c89f7d0dfc3457aa75d498541ef2c4c7239b@ec2-50-17-194-186.compute-1.amazonaws.com:5432/d96s008caq17v8
+    profiles:
+        active: dev
+
+basepackages: br.com.enjoei2.perfil
+
+# SERVER
+server: 
+    port: 7864
+    //context-path: /api
+    
+#End points de gerenciamento em porta separada.
+management:
+  port: 7863
+  security:
+    enabled: false

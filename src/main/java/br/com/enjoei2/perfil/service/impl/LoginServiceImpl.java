@@ -1,9 +1,9 @@
 package br.com.enjoei2.perfil.service.impl;
 
 import br.com.enjoei2.perfil.model.Login;
-import br.com.enjoei2.perfil.service.LoginService;
+import br.com.enjoei2.perfil.service.ILoginService;
 
-public class LoginServiceImpl implements LoginService {
+public class LoginServiceImpl implements ILoginService {
 
 	@Override
 	public String login(Login login) {

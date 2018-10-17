@@ -14,29 +14,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import br.com.enjoei2.perfil.model.Client;
-import br.com.enjoei2.perfil.service.PerfilService;
+import br.com.enjoei2.perfil.model.User;
+import br.com.enjoei2.perfil.service.IPerfilService;
 
 @Controller
 @RequestMapping("/perfil")
 public class PerfilController {
 	
 	@Autowired
-	private PerfilService perfilService;
+	private IPerfilService perfilService;
 	
 	@PostMapping()
-	public @ResponseStatus ResponseEntity<Object> registerClient(@RequestBody Client client) {
+	public @ResponseStatus ResponseEntity<Object> registerClient(@RequestBody User client) {
 		perfilService.registerClient(client);
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 	
 	@GetMapping("/{id}")
-	public @ResponseBody Client retrieveClient(@PathVariable("id") String clientId) {		
+	public @ResponseBody User retrieveClient(@PathVariable("id") String clientId) {		
 		return perfilService.retrieveClient(clientId);
 	}
 	
 	@PutMapping("/{id}")
-	public @ResponseStatus ResponseEntity<Object> updateClient(@RequestBody Client client){
+	public @ResponseStatus ResponseEntity<Object> updateClient(@RequestBody User client){
 		perfilService.updateClient(client);
 		return null;
 	}
