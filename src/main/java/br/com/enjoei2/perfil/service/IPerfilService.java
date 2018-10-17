@@ -4,9 +4,9 @@ import br.com.enjoei2.perfil.model.User;
 
 public interface IPerfilService {
 
-	public void registerClient(User client);
+	public void registerClient(User user);
 	
-	public void updateClient(User client);
+	public void updateClient(User user);
 	
 	public void removeClient(Long userId);
 	

@@ -1,42 +1,27 @@
 package br.com.enjoei2.perfil.model;
 
 import java.util.Date;
-import javax.persistence.*;
 
-@Entity
+
+
+
 public class User {
 
-	@Column(columnDefinition = "userId")
 	private String userId;
-	@Column(columnDefinition = "profileImage")
 	private byte[] profileImage;
-	@Column(columnDefinition = "name")
 	private String name;
-	@Column(columnDefinition = "email")
 	private String email;
-	@Column(columnDefinition = "cpf")
 	private String cpf;
-	@Column(columnDefinition = "ddd")
 	private String ddd;
-	@Column(columnDefinition = "phone")
 	private String phone;
-	@Column(columnDefinition = "birthDate")
 	private Date birthDate;
-	@Column(columnDefinition = "sex")
 	private Boolean sex;
-	@Column(columnDefinition = "cep")
 	private String cep;
-	@Column(columnDefinition = "streetName")
 	private String streetName;
-	@Column(columnDefinition = "addressNumber")
 	private String addressNumber;
-	@Column(columnDefinition = "complement")
 	private String complement;
-	@Column(columnDefinition = "neighborhood")
 	private String neighborhood;
-	@Column(columnDefinition = "state")
 	private String state;
-	@Column(columnDefinition = "city")
 	private String city;
 
 	public String getClientId() {
