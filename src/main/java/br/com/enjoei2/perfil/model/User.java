@@ -2,11 +2,19 @@ package br.com.enjoei2.perfil.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
-
+@Entity
+@Table(name ="users")
 public class User {
 
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	private String userId;
 	private byte[] profileImage;
 	private String name;

@@ -1,5 +1,9 @@
 package br.com.enjoei2.perfil.controller;
 
+import java.util.Optional;
+
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +26,9 @@ import br.com.enjoei2.perfil.service.IPerfilService;
 public class PerfilController {
 	
 	@Autowired
+	DataSource dataSource;
+	
+	@Autowired
 	private IPerfilService perfilService;
 	
 	@PostMapping()
@@ -31,7 +38,7 @@ public class PerfilController {
 	}
 	
 	@GetMapping("/{id}")
-	public @ResponseBody User retrieveClient(@PathVariable("id") Long clientId) {		
+	public @ResponseBody Optional<User> retrieveClient(@PathVariable("id") Long clientId) {		
 		return perfilService.retrieveClient(clientId);
 	}
 	

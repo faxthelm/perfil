@@ -1,5 +1,7 @@
 package br.com.enjoei2.perfil.service;
 
+import java.util.Optional;
+
 import br.com.enjoei2.perfil.model.User;
 
 public interface IPerfilService {
@@ -10,5 +12,5 @@ public interface IPerfilService {
 	
 	public void removeClient(Long userId);
 	
-	public User retrieveClient(Long userId);
+	public Optional<User> retrieveClient(Long userId);
 }
