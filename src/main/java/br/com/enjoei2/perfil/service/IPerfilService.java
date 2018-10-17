@@ -8,7 +8,7 @@ public interface IPerfilService {
 	
 	public void updateClient(User client);
 	
-	public void removeClient(String clientId);
+	public void removeClient(Long userId);
 	
-	public User retrieveClient(String clientId);
+	public User retrieveClient(Long userId);
 }

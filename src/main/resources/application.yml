@@ -10,10 +10,6 @@ info:
     description: ${project.description}
     version: ${project.version}
 
-spring.jmx:
-   enabled: false
-   
-
 spring:
     application:
         name: perfil
@@ -30,7 +26,6 @@ basepackages: br.com.enjoei2.perfil
 # SERVER
 server: 
     port: 7864
-    //context-path: /api
     
 #End points de gerenciamento em porta separada.
 management:

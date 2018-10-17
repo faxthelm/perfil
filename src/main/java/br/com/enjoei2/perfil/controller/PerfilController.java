@@ -31,7 +31,7 @@ public class PerfilController {
 	}
 	
 	@GetMapping("/{id}")
-	public @ResponseBody User retrieveClient(@PathVariable("id") String clientId) {		
+	public @ResponseBody User retrieveClient(@PathVariable("id") Long clientId) {		
 		return perfilService.retrieveClient(clientId);
 	}
 	
@@ -42,7 +42,7 @@ public class PerfilController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public @ResponseStatus ResponseEntity<Object> removeClient(@PathVariable("id") String clientId){
+	public @ResponseStatus ResponseEntity<Object> removeClient(@PathVariable("id") Long clientId){
 		perfilService.removeClient(clientId);
 		return null;
 	}
