@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.5.RELEASE'
+		springBootVersion = '2.0.6.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -23,11 +23,12 @@ repositories {
 	mavenCentral()
 }
 
+
 dependencies {
-	implementation('org.springframework.boot:spring-boot-starter-mail')
-	implementation('org.springframework.boot:spring-boot-starter-security')
 	implementation('org.springframework.boot:spring-boot-starter-web')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
-	testImplementation('org.springframework.security:spring-security-test')
-	compile("org.postgresql:postgresql:9.4-1200-jdbc41") 
+	compile("io.springfox:springfox-swagger2:2.0.2")
+	compile("io.springfox:springfox-swagger-ui:2.0.2")
 }
+
+
