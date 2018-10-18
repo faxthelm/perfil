@@ -2,8 +2,6 @@ package br.com.enjoei2.perfil.controller;
 
 import java.util.Optional;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,32 +23,31 @@ import br.com.enjoei2.perfil.service.IPerfilService;
 @RequestMapping("/perfil")
 public class PerfilController {
 	
-	@Autowired
-	DataSource dataSource;
+
 	
 	@Autowired
 	private IPerfilService perfilService;
 	
 	@PostMapping()
-	public @ResponseStatus ResponseEntity<Object> registerClient(@RequestBody User client) {
-		perfilService.registerClient(client);
+	public @ResponseStatus ResponseEntity<Object> registerClient(@RequestBody User user) {
+		perfilService.registerClient(user);
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 	
 	@GetMapping("/{id}")
-	public @ResponseBody Optional<User> retrieveClient(@PathVariable("id") Long clientId) {		
-		return perfilService.retrieveClient(clientId);
+	public @ResponseBody Optional<User> retrieveClient(@PathVariable("id") Long userId) {		
+		return perfilService.retrieveClient(userId);
 	}
 	
 	@PutMapping("/{id}")
-	public @ResponseStatus ResponseEntity<Object> updateClient(@RequestBody User client){
-		perfilService.updateClient(client);
+	public @ResponseStatus ResponseEntity<Object> updateClient(@RequestBody User user){
+		perfilService.updateClient(user);
 		return null;
 	}
 	
 	@DeleteMapping("/{id}")
-	public @ResponseStatus ResponseEntity<Object> removeClient(@PathVariable("id") Long clientId){
-		perfilService.removeClient(clientId);
+	public @ResponseStatus ResponseEntity<Object> removeClient(@PathVariable("id") Long userId){
+		perfilService.removeClient(userId);
 		return null;
 	}
 

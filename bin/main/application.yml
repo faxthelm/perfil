@@ -11,15 +11,23 @@ info:
     version: ${project.version}
 
 spring:
-    application:
-        name: perfil
-    main:
-        banner-mode: "off"
-        
-    datasource:
-       url: ${JDBC_DATABASE_URL}
-       username: ${JDBC_DATABASE_USERNAME}
-       password: ${JDBC_DATABASE_PASSWORD}
+  application:
+      name: perfil
+  main:
+    banner-mode: "off"
+    
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://ec2-50-17-194-186.compute-1.amazonaws.com:5432/d96s008caq17v8
+    username: zmrlqlswfjnquy
+    password: 110fe140eeb97738cf3ba50a2f28c89f7d0dfc3457aa75d498541ef2c4c7239b
+    driverClassName: org.postgresql.Driver
+
          
 basepackages: br.com.enjoei2.perfil
 
