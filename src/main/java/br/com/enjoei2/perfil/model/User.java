@@ -2,34 +2,67 @@ package br.com.enjoei2.perfil.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import org.hibernate.annotations.Table;
+import org.springframework.data.annotation.Id;
+
 
 
 @Entity
-@Table(name ="users")
+@Table(appliesTo = "user")
 public class User {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private String userId;
+	
+	@Column(name = "profileImage")
 	private byte[] profileImage;
+	
+	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "cpf")
 	private String cpf;
+	
+	@Column(name = "ddd")
 	private String ddd;
+	
+	@Column(name = "phone")
 	private String phone;
+	
+	@Column(name = "birthDate")
 	private Date birthDate;
+	
+	@Column(name = "sex")
 	private Boolean sex;
+	
+	@Column(name = "cep")
 	private String cep;
+	
+	@Column(name = "streetName")
 	private String streetName;
+	
+	@Column(name = "addressNumber")
 	private String addressNumber;
+	
+	@Column(name = "complement")
 	private String complement;
+	
+	@Column(name = "neighborhood")
 	private String neighborhood;
+	
+	@Column(name = "state")
 	private String state;
+	
+	@Column(name = "city")
 	private String city;
 
 	public String getClientId() {

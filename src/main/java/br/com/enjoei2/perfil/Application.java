@@ -10,7 +10,6 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableAutoConfiguration
 @ComponentScan
-//@EnableJpaRepositories("br.com.enjoei2.perfil")
 public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
