@@ -40,3 +40,21 @@ management:
   port: 7863
   security:
     enabled: false
+
+#spring-boot-starter-mail properties
+  spring:
+    mail:
+      host: smtp.gmail.com
+      port: 587
+      username: enjoei2.assistencia@gmail.com
+      password: perfil-enjoei
+      properties:
+        mail:
+          smtp:
+            auth: true
+            starttls:
+              enable: true
+              required: true
+          ssl:
+            enable: false
+      test-connection: true
