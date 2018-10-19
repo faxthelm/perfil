@@ -27,7 +27,7 @@ public class LoginServiceImpl implements ILoginService {
 	public String recoverPassword(String email) {
 		String token = generateToken();
 		// Buscar no banco pelo email
-		String name = "Ana";
+		String name = "Fefucho";
 		try {
 			MimeMessage mail = mailSender.createMimeMessage();
 
