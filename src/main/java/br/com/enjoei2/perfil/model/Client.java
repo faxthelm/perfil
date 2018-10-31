@@ -3,28 +3,38 @@ package br.com.enjoei2.perfil.model;
 import java.util.Date;
 
 
-import org.hibernate.annotations.Entity;
+
 import org.hibernate.annotations.Table;
 import org.springframework.data.annotation.Id;
 
+import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 
 
 @Entity
-@Table(appliesTo = "user")
-public class User {
+@Table(appliesTo = "client")
+public class Client {
+
+	public enum Gender{
+		MALE, FEMALE, OTHER
+	}
+	public enum Size{
+		PP, P, M, G, GG
+	}
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	private String userId;
+    @GeneratedValue
+	private Long clientId;
 	
-	@Column(name = "profileImage")
+	@Column(name = "profile-image")
 	private byte[] profileImage;
 	
-	@Column(name = "name")
-	private String name;
+	@Column(name = "first-name")
+	private String firstName;
+
+	@Column(name = "last-name")
+	private String lastName;
 	
 	@Column(name = "email")
 	private String email;
@@ -38,19 +48,19 @@ public class User {
 	@Column(name = "phone")
 	private String phone;
 	
-	@Column(name = "birthDate")
+	@Column(name = "birth-date")
 	private Date birthDate;
 	
 	@Column(name = "sex")
-	private Boolean sex;
+	private Gender sex;
 	
 	@Column(name = "cep")
 	private String cep;
 	
-	@Column(name = "streetName")
+	@Column(name = "street-name")
 	private String streetName;
 	
-	@Column(name = "addressNumber")
+	@Column(name = "address-number")
 	private String addressNumber;
 	
 	@Column(name = "complement")
@@ -65,12 +75,27 @@ public class User {
 	@Column(name = "city")
 	private String city;
 
-	public String getClientId() {
-		return userId;
+	@Column(name = "likes")
+	private Long likes;
+
+	@Column(name = "dislikes")
+	private Long dislikes;
+
+	@Column(name= "sales")
+	private Long sales;
+
+	@Column(name = "size")
+	private Size size;
+
+	@Column(name = "shoe-size")
+	private int shoeSize;
+
+	public Long getClientId() {
+		return clientId;
 	}
 
-	public void setClientId(String clientId) {
-		this.userId = clientId;
+	public void setClientId(Long clientId) {
+		this.clientId = clientId;
 	}
 
 	public byte[] getProfileImage() {
@@ -81,12 +106,20 @@ public class User {
 		this.profileImage = profileImage;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getEmail() {
@@ -129,11 +162,11 @@ public class User {
 		this.birthDate = birthDate;
 	}
 
-	public Boolean getSex() {
+	public Gender getSex() {
 		return sex;
 	}
 
-	public void setSex(Boolean sex) {
+	public void setSex(Gender sex) {
 		this.sex = sex;
 	}
 
@@ -193,4 +226,43 @@ public class User {
 		this.city = city;
 	}
 
+	public Long getLikes() {
+		return likes;
+	}
+
+	public void setLikes(Long likes) {
+		this.likes = likes;
+	}
+
+	public Long getDislikes() {
+		return dislikes;
+	}
+
+	public void setDislikes(Long dislikes) {
+		this.dislikes = dislikes;
+	}
+
+	public Long getSales() {
+		return sales;
+	}
+
+	public void setSales(Long sales) {
+		this.sales = sales;
+	}
+
+	public Size getSize() {
+		return size;
+	}
+
+	public void setSize(Size size) {
+		this.size = size;
+	}
+
+	public int getShoeSize() {
+		return shoeSize;
+	}
+
+	public void setShoeSize(int shoeSize) {
+		this.shoeSize = shoeSize;
+	}
 }

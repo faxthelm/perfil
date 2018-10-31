@@ -2,6 +2,7 @@ package br.com.enjoei2.perfil.controller;
 
 import java.util.Optional;
 
+import br.com.enjoei2.perfil.model.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import br.com.enjoei2.perfil.model.User;
 import br.com.enjoei2.perfil.service.IPerfilService;
 
 @Controller
@@ -29,19 +29,19 @@ public class PerfilController {
 	private IPerfilService perfilService;
 	
 	@PostMapping()
-	public @ResponseStatus ResponseEntity<Object> registerClient(@RequestBody User user) {
-		perfilService.registerClient(user);
+	public @ResponseStatus ResponseEntity<Object> registerClient(@RequestBody Client client) {
+		perfilService.registerClient(client);
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 	
 	@GetMapping("/{id}")
-	public @ResponseBody Optional<User> retrieveClient(@PathVariable("id") Long userId) {		
+	public @ResponseBody Optional<Client> retrieveClient(@PathVariable("id") Long userId) {
 		return perfilService.retrieveClient(userId);
 	}
 	
 	@PutMapping("/{id}")
-	public @ResponseStatus ResponseEntity<Object> updateClient(@RequestBody User user){
-		perfilService.updateClient(user);
+	public @ResponseStatus ResponseEntity<Object> updateClient(@RequestBody Client client){
+		perfilService.updateClient(client);
 		return null;
 	}
 	
