@@ -17,7 +17,7 @@ public class LoginController {
     @Autowired
     ILoginService iLoginService;
 
-    @ApiOperation(value = "Recuperar senha através do e-mail (Envio de token para o e-mail em questão)")
+    @ApiOperation(value = "Requisitar recuperação de senha através do e-mail (Envio de token para o e-mail em questão)")
     @GetMapping("/recoverPassword")
     public ResponseEntity recoverPassword(@RequestParam String email){
         return ResponseEntity.ok(iLoginService.recoverPassword(email));
@@ -27,6 +27,12 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody Login login){
         return ResponseEntity.ok(iLoginService.login(login));
+    }
+
+    @ApiOperation(value = "Atualizar senha através do token de recuperação enviado por e-mail")
+    @PostMapping("/updateRecoveredPassword")
+    public ResponseEntity updateRecoveredPassword(@RequestParam String email, @RequestParam String token, @RequestParam String newPassword){
+        return ResponseEntity.ok(iLoginService.updateRecoveryPassword(email, token, newPassword));
     }
 
 }

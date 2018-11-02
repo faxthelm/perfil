@@ -93,6 +93,9 @@ public class Client {
 	@Column(name = "shoe-size")
 	private int shoeSize;
 
+	@Column(name = "recovery-token")
+	private String recoveryToken;
+
 	public Long getClientId() {
 		return clientId;
 	}
@@ -283,5 +286,13 @@ public class Client {
 
 	public void setAddressNumber(String addressNumber) {
 		this.addressNumber = addressNumber;
+	}
+
+	public String getRecoveryToken() {
+		return recoveryToken;
+	}
+
+	public void setRecoveryToken(String recoveryToken) {
+		this.recoveryToken = recoveryToken;
 	}
 }

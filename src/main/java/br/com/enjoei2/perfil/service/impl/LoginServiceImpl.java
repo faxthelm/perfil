@@ -27,7 +27,7 @@ public class LoginServiceImpl implements ILoginService {
 		if(client==null){
 			return "Usuário não cadastrado";
 		}
-		if(login.getPassword().equals(client.getPassword())){
+		if(!login.getPassword().equals(client.getPassword())){
 			return "Senha está incorreta";
 		}
 		return String.valueOf(client.getClientId());
@@ -42,6 +42,8 @@ public class LoginServiceImpl implements ILoginService {
 			return "E-mail não cadastrado";
 		}
 		String name = client.getFirstName();
+		client.setRecoveryToken(token);
+		clientRepository.save(client);
 		try {
 			MimeMessage mail = mailSender.createMimeMessage();
 
@@ -60,7 +62,7 @@ public class LoginServiceImpl implements ILoginService {
 		
 	}
 
-	public String generateToken(){
+	private String generateToken(){
 		SecureRandom random = new SecureRandom();
 		byte bytes[] = new byte[20];
 		random.nextBytes(bytes);
@@ -70,5 +72,16 @@ public class LoginServiceImpl implements ILoginService {
 		return initialLettersRemoved[1].toUpperCase();
 	}
 
+	@Override
+	public String updateRecoveryPassword(String email, String token, String newPassword){
+		Client client = clientRepository.findByEmail(email);
+		if(!client.getRecoveryToken().equals(token)){
+			return "Token inválido";
+		}
+		client.setPassword(newPassword);
+		client.setRecoveryToken(null);
+		clientRepository.save(client);
+		return "OK";
+	}
 
 }
