@@ -1,17 +1,13 @@
 package br.com.enjoei2.perfil.model;
 
-import java.util.Date;
-
-
-
 import org.hibernate.annotations.Table;
-
-
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Date;
+
 
 
 @Entity
@@ -40,6 +36,9 @@ public class Client {
 	
 	@Column(name = "email")
 	private String email;
+
+	@Column(name = "password")
+	private String password;
 	
 	@Column(name = "cpf")
 	private String cpf;
@@ -91,6 +90,9 @@ public class Client {
 
 	@Column(name = "shoe_size")
 	private int shoeSize;
+
+	@Column(name = "recovery-token")
+	private String recoveryToken;
 
 	public Long getClientId() {
 		return clientId;
@@ -266,5 +268,29 @@ public class Client {
 
 	public void setShoeSize(int shoeSize) {
 		this.shoeSize = shoeSize;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getAddressNumber() {
+		return addressNumber;
+	}
+
+	public void setAddressNumber(String addressNumber) {
+		this.addressNumber = addressNumber;
+	}
+
+	public String getRecoveryToken() {
+		return recoveryToken;
+	}
+
+	public void setRecoveryToken(String recoveryToken) {
+		this.recoveryToken = recoveryToken;
 	}
 }
