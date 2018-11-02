@@ -1,5 +1,7 @@
 package br.com.enjoei2.perfil.service.impl;
 
+import br.com.enjoei2.perfil.dao.ClientRepository;
+import br.com.enjoei2.perfil.model.Client;
 import br.com.enjoei2.perfil.model.Login;
 import br.com.enjoei2.perfil.service.ILoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +18,30 @@ public class LoginServiceImpl implements ILoginService {
 	@Autowired
 	private JavaMailSender mailSender;
 
+	@Autowired
+	private ClientRepository clientRepository;
+
 	@Override
 	public String login(Login login) {
-		return null;
-		// TODO Auto-generated method stub
+		Client client = clientRepository.findByEmail(login.getLogin());
+		if(client==null){
+			return "Usuário não cadastrado";
+		}
+		if(login.getPassword().equals(client.getPassword())){
+			return "Senha está incorreta";
+		}
+		return String.valueOf(client.getClientId());
 		
 	}
 
 	@Override
 	public String recoverPassword(String email) {
 		String token = generateToken();
-		// Buscar no banco pelo email
-		String name = "Fefucho";
+		Client client = clientRepository.findByEmail(email);
+		if(client==null){
+			return "E-mail não cadastrado";
+		}
+		String name = client.getFirstName();
 		try {
 			MimeMessage mail = mailSender.createMimeMessage();
 
