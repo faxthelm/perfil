@@ -5,11 +5,13 @@ import java.util.Date;
 
 
 import org.hibernate.annotations.Table;
-import org.springframework.data.annotation.Id;
 
-import javax.persistence.Entity;
+
+
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 
 @Entity
@@ -27,13 +29,13 @@ public class Client {
     @GeneratedValue
 	private Long clientId;
 	
-	@Column(name = "profile-image")
+	@Column(name = "profile_image")
 	private byte[] profileImage;
 	
-	@Column(name = "first-name")
+	@Column(name = "first_name")
 	private String firstName;
 
-	@Column(name = "last-name")
+	@Column(name = "last_name")
 	private String lastName;
 	
 	@Column(name = "email")
@@ -48,7 +50,7 @@ public class Client {
 	@Column(name = "phone")
 	private String phone;
 	
-	@Column(name = "birth-date")
+	@Column(name = "birth_date")
 	private Date birthDate;
 	
 	@Column(name = "sex")
@@ -57,10 +59,10 @@ public class Client {
 	@Column(name = "cep")
 	private String cep;
 	
-	@Column(name = "street-name")
+	@Column(name = "street_name")
 	private String streetName;
 	
-	@Column(name = "address-number")
+	@Column(name = "address_number")
 	private String addressNumber;
 	
 	@Column(name = "complement")
@@ -87,7 +89,7 @@ public class Client {
 	@Column(name = "size")
 	private Size size;
 
-	@Column(name = "shoe-size")
+	@Column(name = "shoe_size")
 	private int shoeSize;
 
 	public Long getClientId() {
