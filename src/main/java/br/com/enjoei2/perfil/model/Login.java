@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class Login {
 
-	@ApiModelProperty(value = "E-mail", example = "gabriel.martins@gmail.com")
+	@ApiModelProperty(value = "E_mail", example = "gabriel.martins@gmail.com")
 	private String email;
 	@ApiModelProperty(value = "Senha")
 	private String password;
