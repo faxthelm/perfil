@@ -91,7 +91,7 @@ public class Client {
 	@Column(name = "shoe_size")
 	private int shoeSize;
 
-	@Column(name = "recovery-token")
+	@Column(name = "recovery_token")
 	private String recoveryToken;
 
 	public Long getClientId() {

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ClientRepository extends CrudRepository<Client, Long>{
 
-    @Query("select c from Client where c.email=:email")
+    @Query("select c from Client c where c.email=:email")
     public Client findByEmail(@Param("email") String email);
 
 }
