@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.internet.MimeMessage;
 import java.security.SecureRandom;
+import java.util.Optional;
 
 @Service
 public class LoginServiceImpl implements ILoginService {
@@ -23,21 +24,21 @@ public class LoginServiceImpl implements ILoginService {
 
 	@Override
 	public String login(Login login) {
-		Client client = clientRepository.findByEmail(login.getLogin());
-		if(client==null){
+		Optional<Client> client = clientRepository.findByEmail(login.getEmail());
+		if(!client.isPresent()){
 			return "Usuário não cadastrado";
 		}
-		if(!login.getPassword().equals(client.getPassword())){
+		if(!login.getPassword().equals(client.get().getPassword())){
 			return "Senha está incorreta";
 		}
-		return String.valueOf(client.getClientId());
+		return String.valueOf(client.get().getClientId());
 		
 	}
 
 	@Override
 	public String recoverPassword(String email) {
 		String token = generateToken();
-		Client client = clientRepository.findByEmail(email);
+		Client client = clientRepository.findByEmail(email).get();
 		if(client==null){
 			return "E-mail não cadastrado";
 		}
@@ -74,7 +75,7 @@ public class LoginServiceImpl implements ILoginService {
 
 	@Override
 	public String updateRecoveryPassword(String email, String token, String newPassword){
-		Client client = clientRepository.findByEmail(email);
+		Client client = clientRepository.findByEmail(email).get();
 		if(!client.getRecoveryToken().equals(token)){
 			return "Token inválido";
 		}

@@ -1,8 +1,9 @@
 package br.com.enjoei2.perfil.controller;
 
-import java.util.Optional;
-
+import br.com.enjoei2.perfil.dto.ClientReducedDTO;
+import br.com.enjoei2.perfil.dto.ClientRegisterDTO;
 import br.com.enjoei2.perfil.model.Client;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import br.com.enjoei2.perfil.service.IPerfilService;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/perfil")
 public class PerfilController {
@@ -27,28 +30,36 @@ public class PerfilController {
 	
 	@Autowired
 	private IPerfilService perfilService;
-	
+
+	@ApiOperation(value = "Registra o cliente")
 	@PostMapping()
-	public @ResponseStatus ResponseEntity<Object> registerClient(@RequestBody Client client) {
-		perfilService.registerClient(client);
+	public @ResponseStatus ResponseEntity<Object> registerClient(@RequestBody ClientRegisterDTO clientRegisterDTO) {
+		perfilService.registerClient(clientRegisterDTO);
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
-	
+
+	@ApiOperation(value = "Retorna os dados do cliente especificado por id")
 	@GetMapping("/{id}")
-	public @ResponseBody Optional<Client> retrieveClient(@PathVariable("id") Long userId) {
+	public @ResponseBody ClientReducedDTO retrieveClient(@PathVariable("id") Long userId) {
 		return perfilService.retrieveClient(userId);
+	}
+
+	@ApiOperation(value = "Retorna os dados do cliente especificado pelo seu email")
+	@GetMapping("/email/{email}")
+	public @ResponseBody ClientReducedDTO retrieveClient(@PathVariable("email") String email) {
+		return perfilService.retrieveClientByEmail(email);
 	}
 	
 	@PutMapping("/{id}")
-	public @ResponseStatus ResponseEntity<Object> updateClient(@RequestBody Client client){
-		perfilService.updateClient(client);
-		return null;
+	public @ResponseStatus ResponseEntity<Object> updateClient(@RequestBody Optional<Client> client, @PathVariable("id") Long userId){
+		perfilService.updateClient(client, userId);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
 	public @ResponseStatus ResponseEntity<Object> removeClient(@PathVariable("id") Long userId){
 		perfilService.removeClient(userId);
-		return null;
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 }

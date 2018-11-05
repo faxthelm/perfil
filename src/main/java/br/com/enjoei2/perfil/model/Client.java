@@ -8,18 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
 
-
-
 @Entity
 @Table(appliesTo = "client")
 public class Client {
-
-	public enum Gender{
-		MALE, FEMALE, OTHER
-	}
-	public enum Size{
-		PP, P, M, G, GG
-	}
 
 	@Id
     @GeneratedValue
@@ -28,31 +19,31 @@ public class Client {
 	@Column(name = "profile_image")
 	private byte[] profileImage;
 	
-	@Column(name = "first_name")
+	@Column(name = "first_name", nullable = false)
 	private String firstName;
 
-	@Column(name = "last_name")
+	@Column(name = "last_name", nullable = false)
 	private String lastName;
 	
-	@Column(name = "email")
+	@Column(name = "email", nullable = false)
 	private String email;
 
-	@Column(name = "password")
+	@Column(name = "password", nullable = false)
 	private String password;
 	
-	@Column(name = "cpf")
+	@Column(name = "cpf", nullable = false)
 	private String cpf;
 	
-	@Column(name = "ddd")
+	@Column(name = "ddd", nullable = false)
 	private String ddd;
 	
-	@Column(name = "phone")
+	@Column(name = "phone", nullable = false)
 	private String phone;
 	
-	@Column(name = "birth_date")
+	@Column(name = "birth_date", nullable = false)
 	private Date birthDate;
 	
-	@Column(name = "sex")
+	@Column(name = "sex", nullable = false)
 	private Gender sex;
 	
 	@Column(name = "cep")
@@ -292,5 +283,81 @@ public class Client {
 
 	public void setRecoveryToken(String recoveryToken) {
 		this.recoveryToken = recoveryToken;
+	}
+
+	// Nao fazemos o update de ID nem de recovery_token nessa parte.
+	public Client update(Client newClient) {
+		if (this.profileImage != null) {
+			if (!this.profileImage.equals(newClient.getFirstName()) && newClient.getProfileImage() != null)
+				this.setProfileImage(newClient.getProfileImage());
+		}
+		//Estão marcados como NOT NULL no bd, dessa forma se for atualizar com certeza haverá dados.
+		if (!this.firstName.equals(newClient.getFirstName()) && newClient.getFirstName() != null)
+			this.setFirstName(newClient.getFirstName());
+		if (!this.lastName.equals(newClient.getLastName()) && newClient.getLastName() != null)
+			this.setLastName(newClient.getLastName());
+		if (!this.email.equals(newClient.getEmail()) && newClient.getEmail() != null)
+			this.setEmail(newClient.getEmail());
+		if (!this.password.equals(newClient.getPassword()) && newClient.getPassword() != null)
+			this.setPassword(newClient.getPassword());
+		if (!this.cpf.equals(newClient.getCpf()) && newClient.getCpf() != null)
+			this.setCpf(newClient.getCpf());
+		if (!this.ddd.equals(newClient.getDdd()) && newClient.getDdd() != null)
+			this.setDdd(newClient.getDdd());
+		if (!this.phone.equals(newClient.getPhone()) && newClient.getPhone() != null)
+			this.setPhone(newClient.getPhone());
+		if (!this.birthDate.equals(newClient.getBirthDate()) && newClient.getBirthDate() != null)
+			this.setBirthDate(newClient.getBirthDate());
+		if (!this.sex.equals(newClient.getSex()) && newClient.getSex() != null)
+			this.setSex(newClient.getSex());
+		if (this.cep != null) {
+			if (!this.cep.equals(newClient.getCep()) && newClient.getCep() != null)
+				this.setCep(newClient.getCep());
+		}
+		if (this.streetName != null) {
+			if (!this.streetName.equals(newClient.getStreetName()) && newClient.getStreetName() != null)
+				this.setStreetName(newClient.getStreetName());
+		}
+		if (this.addressNumber != null) {
+			if (!this.addressNumber.equals(newClient.getAddressNumber()) && newClient.getAddressNumber() != null)
+				this.setAddressNumber(newClient.getAddressNumber());
+		}
+		if (this.complement != null) {
+			if (!this.complement.equals(newClient.getComplement()) && newClient.getComplement() != null)
+				this.setComplement(newClient.getComplement());
+		}
+		if (this.neighborhood != null) {
+			if (!this.neighborhood.equals(newClient.getNeighborhood()) && newClient.getNeighborhood() != null)
+				this.setNeighborhood(newClient.getNeighborhood());
+		}
+		if (this.state != null) {
+			if (!this.state.equals(newClient.getState()) && newClient.getState() != null)
+				this.setState(newClient.getState());
+		}
+		if (this.city != null) {
+			if (!this.city.equals(newClient.getCity()) && newClient.getCity() != null)
+				this.setCity(newClient.getCity());
+		}
+		if (this.likes != null) {
+			if (!this.likes.equals(newClient.getLikes()) && newClient.getLikes() != null)
+				this.setLikes(newClient.getLikes());
+		}
+		if (this.dislikes != null) {
+			if (!this.dislikes.equals(newClient.getDislikes()) && newClient.getDislikes() != null)
+				this.setDislikes(newClient.getDislikes());
+		}
+		if (this.sales != null) {
+			if (!this.sales.equals(newClient.getSales()) && newClient.getSales() != null)
+				this.setSales(newClient.getSales());
+		}
+		if (this.size != null) {
+			if (!this.size.equals(newClient.getSize()) && newClient.getSize() != null)
+				this.setSize(newClient.getSize());
+		}
+		if (this.shoeSize != 0) {
+			if (this.shoeSize != (newClient.getShoeSize()) && newClient.getShoeSize() != 0)
+				this.setShoeSize(newClient.getShoeSize());
+		}
+		return this;
 	}
 }

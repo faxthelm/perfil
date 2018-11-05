@@ -9,11 +9,11 @@ public class Login {
 	@ApiModelProperty(value = "Senha")
 	private String password;
 
-	public String getLogin() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void setLogin(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
