@@ -290,6 +290,8 @@ public class Client {
 		if (this.profileImage != null) {
 			if (!this.profileImage.equals(newClient.getFirstName()) && newClient.getProfileImage() != null)
 				this.setProfileImage(newClient.getProfileImage());
+		}else{
+			this.setProfileImage(newClient.getProfileImage());
 		}
 		//Estão marcados como NOT NULL no bd, dessa forma se for atualizar com certeza haverá dados.
 		if (!this.firstName.equals(newClient.getFirstName()) && newClient.getFirstName() != null)
@@ -313,22 +315,32 @@ public class Client {
 		if (this.cep != null) {
 			if (!this.cep.equals(newClient.getCep()) && newClient.getCep() != null)
 				this.setCep(newClient.getCep());
+		} else {
+			this.setCep(newClient.getCep());
 		}
 		if (this.streetName != null) {
 			if (!this.streetName.equals(newClient.getStreetName()) && newClient.getStreetName() != null)
 				this.setStreetName(newClient.getStreetName());
+		} else {
+			this.setStreetName(newClient.getStreetName());
 		}
 		if (this.addressNumber != null) {
 			if (!this.addressNumber.equals(newClient.getAddressNumber()) && newClient.getAddressNumber() != null)
 				this.setAddressNumber(newClient.getAddressNumber());
+		} else {
+			this.setAddressNumber(newClient.getAddressNumber());
 		}
 		if (this.complement != null) {
 			if (!this.complement.equals(newClient.getComplement()) && newClient.getComplement() != null)
 				this.setComplement(newClient.getComplement());
+		} else {
+			this.setComplement(newClient.getComplement());
 		}
 		if (this.neighborhood != null) {
 			if (!this.neighborhood.equals(newClient.getNeighborhood()) && newClient.getNeighborhood() != null)
 				this.setNeighborhood(newClient.getNeighborhood());
+		} else {
+			this.setNeighborhood(newClient.getNeighborhood());
 		}
 		if (this.state != null) {
 			if (!this.state.equals(newClient.getState()) && newClient.getState() != null)
@@ -337,10 +349,14 @@ public class Client {
 		if (this.city != null) {
 			if (!this.city.equals(newClient.getCity()) && newClient.getCity() != null)
 				this.setCity(newClient.getCity());
+		} else {
+			this.setCity(newClient.getCity());
 		}
 		if (this.likes != null) {
 			if (!this.likes.equals(newClient.getLikes()) && newClient.getLikes() != null)
 				this.setLikes(newClient.getLikes());
+		} else {
+			this.setLikes(newClient.getLikes());
 		}
 		if (this.dislikes != null) {
 			if (!this.dislikes.equals(newClient.getDislikes()) && newClient.getDislikes() != null)
@@ -349,14 +365,20 @@ public class Client {
 		if (this.sales != null) {
 			if (!this.sales.equals(newClient.getSales()) && newClient.getSales() != null)
 				this.setSales(newClient.getSales());
+		} else {
+			this.setSales(newClient.getSales());
 		}
 		if (this.size != null) {
 			if (!this.size.equals(newClient.getSize()) && newClient.getSize() != null)
 				this.setSize(newClient.getSize());
+		} else {
+			this.setSize(newClient.getSize());
 		}
 		if (this.shoeSize != 0) {
 			if (this.shoeSize != (newClient.getShoeSize()) && newClient.getShoeSize() != 0)
 				this.setShoeSize(newClient.getShoeSize());
+		} else {
+			this.setShoeSize(newClient.getShoeSize());
 		}
 		return this;
 	}
