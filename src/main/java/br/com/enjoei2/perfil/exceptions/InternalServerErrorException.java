@@ -1,6 +1,6 @@
 package br.com.enjoei2.perfil.exceptions;
 
-public class InternalServerErrorException {
+public class InternalServerErrorException extends RuntimeException {
 
     private final String message;
 

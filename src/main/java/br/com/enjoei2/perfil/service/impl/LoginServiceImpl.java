@@ -2,6 +2,7 @@ package br.com.enjoei2.perfil.service.impl;
 
 import br.com.enjoei2.perfil.dao.ClientRepository;
 import br.com.enjoei2.perfil.exceptions.BadRequestException;
+import br.com.enjoei2.perfil.exceptions.InternalServerErrorException;
 import br.com.enjoei2.perfil.model.Client;
 import br.com.enjoei2.perfil.model.Login;
 import br.com.enjoei2.perfil.service.ILoginService;
@@ -59,7 +60,7 @@ public class LoginServiceImpl implements ILoginService {
 			return "OK";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "Erro ao enviar e-mail";
+			throw new InternalServerErrorException("Erro ao enviar e-mail");
 		}
 		
 	}
@@ -78,7 +79,7 @@ public class LoginServiceImpl implements ILoginService {
 	public String updateRecoveryPassword(String email, String token, String newPassword){
 		Client client = clientRepository.findByEmail(email).get();
 		if(!client.getRecoveryToken().equals(token)){
-			return "Token inválido";
+			throw new BadRequestException("token", "Token inválido");
 		}
 		client.setPassword(newPassword);
 		client.setRecoveryToken(null);
