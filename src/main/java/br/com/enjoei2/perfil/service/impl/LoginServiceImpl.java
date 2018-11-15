@@ -1,6 +1,7 @@
 package br.com.enjoei2.perfil.service.impl;
 
 import br.com.enjoei2.perfil.dao.ClientRepository;
+import br.com.enjoei2.perfil.exceptions.BadRequestException;
 import br.com.enjoei2.perfil.model.Client;
 import br.com.enjoei2.perfil.model.Login;
 import br.com.enjoei2.perfil.service.ILoginService;
@@ -26,10 +27,10 @@ public class LoginServiceImpl implements ILoginService {
 	public String login(Login login) {
 		Optional<Client> client = clientRepository.findByEmail(login.getEmail());
 		if(!client.isPresent()){
-			return "Usuário não cadastrado";
+			throw new BadRequestException("login","Usuário não existe");
 		}
 		if(!login.getPassword().equals(client.get().getPassword())){
-			return "Senha está incorreta";
+			throw new BadRequestException("senha","Senha está incorreta");
 		}
 		return String.valueOf(client.get().getClientId());
 		
@@ -40,7 +41,7 @@ public class LoginServiceImpl implements ILoginService {
 		String token = generateToken();
 		Client client = clientRepository.findByEmail(email).get();
 		if(client==null){
-			return "E-mail não cadastrado";
+			throw new BadRequestException("email", "E-mail não cadastrado");
 		}
 		String name = client.getFirstName();
 		client.setRecoveryToken(token);
