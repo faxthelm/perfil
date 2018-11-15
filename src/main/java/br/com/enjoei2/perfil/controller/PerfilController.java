@@ -49,13 +49,15 @@ public class PerfilController {
 	public @ResponseBody ClientReducedDTO retrieveClient(@PathVariable("email") String email) {
 		return perfilService.retrieveClientByEmail(email);
 	}
-	
+
+	@ApiOperation(value = "Atualiza os dados do perfil de id passado")
 	@PutMapping("/{id}")
 	public @ResponseStatus ResponseEntity<Object> updateClient(@RequestBody Optional<Client> client, @PathVariable("id") Long userId){
 		perfilService.updateClient(client, userId);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
+
+	@ApiOperation(value = "Deleta os dados do cliente do id passado")
 	@DeleteMapping("/{id}")
 	public @ResponseStatus ResponseEntity<Object> removeClient(@PathVariable("id") Long userId){
 		perfilService.removeClient(userId);
