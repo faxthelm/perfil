@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import br.com.enjoei2.perfil.service.IPerfilService;
-
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Controller
