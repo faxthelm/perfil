@@ -8,7 +8,7 @@ public class ClientReducedDTO {
 
     private Long clientId;
 
-    private byte[] profileImage;
+    private String profileImage;
 
     private String firstName;
 
@@ -29,11 +29,11 @@ public class ClientReducedDTO {
         this.clientId = clientId;
     }
 
-    public byte[] getProfileImage() {
-        return profileImage;
+    public String getProfileImage() {
+        return this.profileImage;
     }
 
-    public void setProfileImage(byte[] profileImage) {
+    public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
     }
 

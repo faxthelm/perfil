@@ -10,7 +10,7 @@ public interface IPerfilService {
 
 	void registerClient(ClientRegisterDTO clientRegisterDTO);
 	
-	void updateClient(Optional<Client> client, Long userId);
+	void updateClient(Optional<Client> client, Long userId) throws Exception;
 	
 	void removeClient(Long userId);
 	

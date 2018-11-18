@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import br.com.enjoei2.perfil.service.IPerfilService;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Controller
@@ -53,8 +54,12 @@ public class PerfilController {
 	@ApiOperation(value = "Atualiza os dados do perfil de id passado")
 	@PutMapping("/{id}")
 	public @ResponseStatus ResponseEntity<Object> updateClient(@RequestBody Optional<Client> client, @PathVariable("id") Long userId){
-		perfilService.updateClient(client, userId);
-		return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            perfilService.updateClient(client, userId);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "Deleta os dados do cliente do id passado")
