@@ -14,7 +14,7 @@ public interface IPerfilService {
 	
 	void removeClient(Long userId);
 	
-	ClientReducedDTO retrieveClient(Long userId);
+	ClientReducedDTO retrieveClient(Long userId) throws Exception;
 
-	ClientReducedDTO retrieveClientByEmail(String email);
+	ClientReducedDTO retrieveClientByEmail(String email) throws Exception;
 }

@@ -15,11 +15,9 @@ import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.File;
 import com.google.api.client.http.FileContent;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 //import java.security.GeneralSecurityException;
+import java.security.GeneralSecurityException;
 import java.util.*;
 
 import br.com.enjoei2.perfil.dao.ClientRepository;
@@ -51,6 +49,7 @@ public class PerfilServiceImpl implements IPerfilService {
 
     /**
      * Creates an authorized Credential object.
+     *
      * @param HTTP_TRANSPORT The network HTTP Transport.
      * @return An authorized Credential object.
      * @throws IOException If the credentials.json file cannot be found.
@@ -68,6 +67,44 @@ public class PerfilServiceImpl implements IPerfilService {
                 .build();
         LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
+    }
+
+    private Client findClientWithProfileImage(String userIdOrMail, Boolean findByEmail) throws Exception {
+        Optional clientOptional;
+        if (findByEmail) {
+            clientOptional = clientRepository.findByEmail(userIdOrMail);
+        } else {
+            clientOptional = clientRepository.findById(Long.parseLong(userIdOrMail));
+        }
+        if (clientOptional.isPresent()) {
+            Client savedClient = (Client) clientOptional.get();
+            String imageId = savedClient.getProfileImage();
+            if (imageId == null) {
+                return savedClient;
+            }
+            ByteArrayOutputStream outStrimm = new ByteArrayOutputStream();
+            // Build a new authorized API client service.
+            final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+            Drive service = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+                    .setApplicationName(APPLICATION_NAME)
+                    .build();
+
+            service.files()
+                    .get(imageId)
+                    .executeMediaAndDownloadTo(outStrimm);
+
+            // If the user's image file was mistakenly deleted by someone for some reason...
+            if (outStrimm.size() == 0) {
+                savedClient.setProfileImage(null);
+            } else {
+                byte[] imageBytes = outStrimm.toByteArray();
+                String imageIn64 = Base64.getEncoder().encodeToString(imageBytes);
+                savedClient.setProfileImage(imageIn64);
+            }
+            return savedClient;
+        } else {
+            throw new NoSuchElementException("Element with userID " + userIdOrMail + "does not exist.");
+        }
     }
 
     @Autowired
@@ -89,7 +126,7 @@ public class PerfilServiceImpl implements IPerfilService {
             Client newClient = client.get();
             Client savedClient = (Client) savedClientOptional.get();
             String imageIn64 = newClient.getProfileImage();
-        // Post the image to google drive using their api, retrieve the link for access
+            // Post the image to google drive using their api, retrieve the link for access
 
             // Build a new authorized API client service.
             final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
@@ -147,14 +184,14 @@ public class PerfilServiceImpl implements IPerfilService {
     }
 
     @Override
-    public ClientReducedDTO retrieveClient(Long userId) {
-        return new ClientReducedDTO((clientRepository.findById(userId)).get());
+    public ClientReducedDTO retrieveClient(Long userId) throws Exception {
+        return new ClientReducedDTO(findClientWithProfileImage(Long.toString(userId), false));
     }
 
 
     @Override
-    public ClientReducedDTO retrieveClientByEmail(String email) {
-        return new ClientReducedDTO((clientRepository.findByEmail(email)).get());
+    public ClientReducedDTO retrieveClientByEmail(String email) throws Exception {
+        return new ClientReducedDTO(findClientWithProfileImage(email, true));
     }
 
 }

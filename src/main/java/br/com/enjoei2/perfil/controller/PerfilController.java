@@ -37,17 +37,28 @@ public class PerfilController {
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 
+	// Returns the image as a Base64 string.
 	@ApiOperation(value = "Retorna os dados do cliente especificado por id")
 	@GetMapping("/{id}")
 	public @ResponseBody ClientReducedDTO retrieveClient(@PathVariable("id") Long userId) {
-		return perfilService.retrieveClient(userId);
-	}
+        try {
+            return perfilService.retrieveClient(userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 	@ApiOperation(value = "Retorna os dados do cliente especificado pelo seu email")
 	@GetMapping("/email/{email}")
 	public @ResponseBody ClientReducedDTO retrieveClient(@PathVariable("email") String email) {
-		return perfilService.retrieveClientByEmail(email);
-	}
+        try {
+            return perfilService.retrieveClientByEmail(email);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 	@ApiOperation(value = "Atualiza os dados do perfil de id passado")
 	@PutMapping("/{id}")
