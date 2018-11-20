@@ -100,6 +100,8 @@ public class ClientRegisterDTO {
 
     public Client transformToClient(){
         Client client = new Client();
+        // Profile image only gets added through updates
+        client.setProfileImage(null);
         client.setFirstName(this.firstName);
         client.setLastName(this.lastName);
         client.setEmail(this.email);
