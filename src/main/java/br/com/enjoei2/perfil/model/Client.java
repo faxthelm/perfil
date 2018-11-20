@@ -17,7 +17,7 @@ public class Client {
 	private Long clientId;
 	
 	@Column(name = "profile_image")
-	private byte[] profileImage;
+	private String profileImage;
 	
 	@Column(name = "first_name", nullable = false)
 	private String firstName;
@@ -93,11 +93,11 @@ public class Client {
 		this.clientId = clientId;
 	}
 
-	public byte[] getProfileImage() {
+	public String getProfileImage() {
 		return profileImage;
 	}
 
-	public void setProfileImage(byte[] profileImage) {
+	public void setProfileImage(String profileImage) {
 		this.profileImage = profileImage;
 	}
 
@@ -286,7 +286,7 @@ public class Client {
 	}
 
 	// Nao fazemos o update de ID nem de recovery_token nessa parte.
-	public Client update(Client newClient) {
+	public void update(Client newClient) {
 		if (this.profileImage != null) {
 			if (!this.profileImage.equals(newClient.getFirstName()) && newClient.getProfileImage() != null)
 				this.setProfileImage(newClient.getProfileImage());
@@ -380,6 +380,6 @@ public class Client {
 		} else {
 			this.setShoeSize(newClient.getShoeSize());
 		}
-		return this;
+//		return this;
 	}
 }

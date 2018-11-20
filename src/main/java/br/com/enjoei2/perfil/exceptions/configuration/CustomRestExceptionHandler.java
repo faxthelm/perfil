@@ -15,21 +15,21 @@ public class CustomRestExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = BadRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorFieldResponse handleBadRequestException(final BadRequestException exception) {
-        return new ErrorFieldResponse(exception.getField(), exception.getMessage());
+    public ApiErrorFieldResponse handleBadRequestException(final BadRequestException exception) {
+        return new ApiErrorFieldResponse(new ErrorFieldResponse(exception.getField(), exception.getMessage()));
     }
 
     @ResponseBody
     @ExceptionHandler(value = InternalServerErrorException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorFieldResponse handleInternalServerErrorException(final InternalServerErrorException exception) {
-        return new ErrorFieldResponse("error:", exception.getMessage());
+    public ApiErrorFieldResponse handleInternalServerErrorException(final InternalServerErrorException exception) {
+        return new ApiErrorFieldResponse(new ErrorFieldResponse("error:", exception.getMessage()));
     }
 
     @ResponseBody
     @ExceptionHandler(value = EmailAlreadyInUseException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorFieldResponse handleEmailAlreadyInUseException(final EmailAlreadyInUseException exception) {
-        return new ErrorFieldResponse("email:", exception.getMessage());
+    public ApiErrorFieldResponse handleEmailAlreadyInUseException(final EmailAlreadyInUseException exception) {
+        return new ApiErrorFieldResponse(new ErrorFieldResponse("email:", exception.getMessage()));
     }
 }
