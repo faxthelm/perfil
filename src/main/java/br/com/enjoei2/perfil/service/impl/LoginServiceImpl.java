@@ -40,10 +40,11 @@ public class LoginServiceImpl implements ILoginService {
 	@Override
 	public String recoverPassword(String email) {
 		String token = generateToken();
-		Client client = clientRepository.findByEmail(email).get();
-		if(client==null){
+		Optional<Client> clientOptional = clientRepository.findByEmail(email);
+		if(clientOptional.isPresent()){
 			throw new BadRequestException("email", "E-mail não cadastrado");
 		}
+		Client client = clientOptional.get();
 		String name = client.getFirstName();
 		client.setRecoveryToken(token);
 		clientRepository.save(client);
