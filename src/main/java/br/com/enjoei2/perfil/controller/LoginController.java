@@ -20,7 +20,8 @@ public class LoginController {
     @ApiOperation(value = "Requisitar recuperação de senha através do e-mail (Envio de token para o e-mail em questão)")
     @GetMapping("/recoverPassword")
     public ResponseEntity recoverPassword(@RequestParam String email){
-        return ResponseEntity.ok(iLoginService.recoverPassword(email));
+        iLoginService.recoverPassword(email);
+        return ResponseEntity.ok().build();
     }
 
     @ApiOperation(value = "Realizar login (Checagem se usuário existe e se senha está correta)")

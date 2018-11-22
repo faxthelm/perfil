@@ -38,10 +38,10 @@ public class LoginServiceImpl implements ILoginService {
 	}
 
 	@Override
-	public String recoverPassword(String email) {
+	public void recoverPassword(String email) {
 		String token = generateToken();
 		Optional<Client> clientOptional = clientRepository.findByEmail(email);
-		if(clientOptional.isPresent()){
+		if(!clientOptional.isPresent()){
 			throw new BadRequestException("email", "E-mail não cadastrado");
 		}
 		Client client = clientOptional.get();
@@ -58,7 +58,7 @@ public class LoginServiceImpl implements ILoginService {
 					+ token + "</b>! </p>", true);
 			mailSender.send(mail);
 
-			return "OK";
+			return ;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new InternalServerErrorException("Erro ao enviar e-mail");
