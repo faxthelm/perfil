@@ -153,7 +153,7 @@ public class PerfilServiceImpl implements IPerfilService {
             String folderId = list.get(0).getId();
 
             File fileMetadata = new File();
-            fileMetadata.setName("photo.jpg");
+            fileMetadata.setName(savedClient.getClientId() + ".jpg");
             fileMetadata.setParents(Collections.singletonList(folderId));
 
             byte[] imageBytes = Base64.getDecoder().decode(imageIn64);
