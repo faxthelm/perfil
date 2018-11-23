@@ -1,5 +1,6 @@
 package br.com.enjoei2.perfil.controller;
 
+import br.com.enjoei2.perfil.dto.SuccessResponseDTO;
 import br.com.enjoei2.perfil.model.Login;
 import br.com.enjoei2.perfil.service.ILoginService;
 import io.swagger.annotations.ApiOperation;
@@ -26,8 +27,10 @@ public class LoginController {
 
     @ApiOperation(value = "Realizar login (Checagem se usuário existe e se senha está correta)")
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody Login login){
-        return ResponseEntity.ok(iLoginService.login(login));
+    public SuccessResponseDTO login(@RequestBody Login login){
+        SuccessResponseDTO response = new SuccessResponseDTO();
+        response.setMessage(iLoginService.login(login));
+        return response;
     }
 
     @ApiOperation(value = "Atualizar senha através do token de recuperação enviado por e-mail")
