@@ -1,5 +1,6 @@
 package br.com.enjoei2.perfil.service.impl;
 
+import br.com.enjoei2.perfil.dto.ClientLoadUpdateDTO;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -17,7 +18,6 @@ import com.google.api.client.http.FileContent;
 
 import java.io.*;
 //import java.security.GeneralSecurityException;
-import java.security.GeneralSecurityException;
 import java.util.*;
 
 import br.com.enjoei2.perfil.dao.ClientRepository;
@@ -27,6 +27,7 @@ import br.com.enjoei2.perfil.exceptions.EmailAlreadyInUseException;
 import br.com.enjoei2.perfil.model.Client;
 import br.com.enjoei2.perfil.service.IPerfilService;
 import com.google.api.services.drive.model.FileList;
+import com.sun.mail.imap.protocol.BODY;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 //import org.springframework.web.client.RestTemplate;
@@ -194,4 +195,77 @@ public class PerfilServiceImpl implements IPerfilService {
         return new ClientReducedDTO(findClientWithProfileImage(email, true));
     }
 
+    @Override
+    public ClientLoadUpdateDTO retrieveClientFullData(Long userId) throws Exception {
+        return new ClientLoadUpdateDTO(findClientWithProfileImage(Long.toString(userId), false));
+    }
+
+    @Override
+    public Boolean updateLikes(Boolean increase, Long userId) {
+        Optional<Client> client = clientRepository.findById(userId);
+        Long starter = (long) -1;
+        if (client.isPresent()){
+           if(client.get().getLikes() != null){
+               starter = client.get().getLikes();
+               if(increase)
+                   client.get().setLikes(client.get().getLikes() + 1);
+               else if(client.get().getLikes() > 0)
+                   client.get().setLikes(client.get().getLikes() - 1);
+           } else if(increase){
+               client.get().setLikes((long) 1);
+           }
+        }
+        if((starter == -1 || starter == 0) && (client.get().getLikes() == null || client.get().getLikes() == 0))
+            return false;
+        else {
+            clientRepository.save(client.get());
+            return true;
+        }
+    }
+
+    @Override
+    public Boolean updateDislikes(Boolean increase, Long userId) {
+        Optional<Client> client = clientRepository.findById(userId);
+        Long starter = (long) -1;
+        if (client.isPresent()){
+            if(client.get().getDislikes() != null){
+                starter = client.get().getDislikes();
+                if(increase)
+                    client.get().setDislikes(client.get().getDislikes() + 1);
+                else if(client.get().getDislikes() > 0)
+                    client.get().setDislikes(client.get().getDislikes() - 1);
+            } else if(increase){
+                client.get().setDislikes((long) 1);
+            }
+        }
+        if((starter == -1 || starter == 0) && (client.get().getDislikes() == null || client.get().getDislikes() == 0))
+            return false;
+        else {
+            clientRepository.save(client.get());
+            return true;
+        }
+    }
+
+    @Override
+    public Boolean updateSales(Boolean increase, Long userId) {
+        Optional<Client> client = clientRepository.findById(userId);
+        Long starter = (long) -1;
+        if (client.isPresent()) {
+            if (client.get().getSales() != null) {
+                starter = client.get().getSales();
+                if (increase)
+                    client.get().setSales(client.get().getSales() + 1);
+                else if (client.get().getSales() > 0)
+                    client.get().setSales(client.get().getSales() - 1);
+            } else if (increase) {
+                client.get().setSales((long) 1);
+            }
+        }
+        if((starter == -1 || starter == 0) && (client.get().getSales() == null || client.get().getSales() == 0))
+            return false;
+        else {
+            clientRepository.save(client.get());
+            return true;
+        }
+    }
 }

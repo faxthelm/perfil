@@ -1,8 +1,10 @@
 package br.com.enjoei2.perfil.controller;
 
+import br.com.enjoei2.perfil.dto.ClientLoadUpdateDTO;
 import br.com.enjoei2.perfil.dto.ClientReducedDTO;
 import br.com.enjoei2.perfil.dto.ClientRegisterDTO;
 import br.com.enjoei2.perfil.model.Client;
+import com.sun.mail.imap.protocol.BODY;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -78,5 +80,44 @@ public class PerfilController {
 		perfilService.removeClient(userId);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+
+	@ApiOperation(value = "Retorna dados para popular a tela de informações do cliente")
+	@GetMapping("/personalData/{id}")
+	public @ResponseBody ClientLoadUpdateDTO retrieveClientUpdateData (@PathVariable("id") Long userId) {
+		try {
+			return perfilService.retrieveClientFullData(userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@PostMapping("/updateLikes/{id}/{increase}")
+	public @ResponseStatus ResponseEntity<Object> updateLikes(@PathVariable("id") Long userId, @PathVariable("increase") Boolean increase) {
+		Boolean response = perfilService.updateLikes(increase, userId);
+		if(response)
+			return new ResponseEntity<>(HttpStatus.OK);
+		else
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+
+	@PostMapping("/updateDislikes/{id}/{increase}")
+	public @ResponseStatus ResponseEntity<Object> updateDislikes(@PathVariable("id") Long userId, @PathVariable("increase") Boolean increase) {
+		Boolean response = perfilService.updateDislikes(increase, userId);
+		if(response)
+			return new ResponseEntity<>(HttpStatus.OK);
+		else
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+
+	@PostMapping("/updateSales/{id}/{increase}")
+	public @ResponseStatus ResponseEntity<Object> updateSales(@PathVariable("id") Long userId, @PathVariable("increase") Boolean increase) {
+		Boolean response = perfilService.updateSales(increase, userId);
+		if(response)
+			return new ResponseEntity<>(HttpStatus.OK);
+		else
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+
 
 }

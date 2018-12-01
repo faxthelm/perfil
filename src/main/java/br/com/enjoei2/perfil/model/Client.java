@@ -380,6 +380,5 @@ public class Client {
 		} else {
 			this.setShoeSize(newClient.getShoeSize());
 		}
-//		return this;
 	}
 }
