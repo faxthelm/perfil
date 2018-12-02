@@ -4,6 +4,8 @@ import br.com.enjoei2.perfil.model.Client;
 import br.com.enjoei2.perfil.model.Gender;
 import br.com.enjoei2.perfil.model.Size;
 
+import java.util.Date;
+
 public class ClientLoadUpdateDTO {
 
     private Long clientId;
@@ -11,6 +13,7 @@ public class ClientLoadUpdateDTO {
     private String firstName;
     private String lastName;
     private String email;
+    private Date birthDate;
     private String cpf;
     private String ddd;
     private String phone;
@@ -43,6 +46,7 @@ public class ClientLoadUpdateDTO {
         this.city = client.getCity();
         this.size = client.getSize();
         this.shoeSize = client.getShoeSize();
+        this.birthDate = client.getBirthDate();
     }
 
     public Long getClientId() {
@@ -187,5 +191,13 @@ public class ClientLoadUpdateDTO {
 
     public void setShoeSize(int shoeSize) {
         this.shoeSize = shoeSize;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 }
