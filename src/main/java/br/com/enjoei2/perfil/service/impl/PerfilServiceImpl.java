@@ -127,50 +127,51 @@ public class PerfilServiceImpl implements IPerfilService {
             Client newClient = client.get();
             Client savedClient = (Client) savedClientOptional.get();
             String imageIn64 = newClient.getProfileImage();
-            // Post the image to google drive using their api, retrieve the link for access
+            if(imageIn64 != null) {
+                // Post the image to google drive using their api, retrieve the link for access
 
-            // Build a new authorized API client service.
-            final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-            Drive service = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
-                    .setApplicationName(APPLICATION_NAME)
-                    .build();
+                // Build a new authorized API client service.
+                final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+                Drive service = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+                        .setApplicationName(APPLICATION_NAME)
+                        .build();
 
-            String pageToken = null;
-            List<File> list = new LinkedList<>();
+                String pageToken = null;
+                List<File> list = new LinkedList<>();
 
-            String query = " name = '" + saveFolder + "' " //
-                    + " and mimeType = 'application/vnd.google-apps.folder' " //
-                    + " and 'root' in parents";
+                String query = " name = '" + saveFolder + "' " //
+                        + " and mimeType = 'application/vnd.google-apps.folder' " //
+                        + " and 'root' in parents";
 
-            do {
-                FileList result = service.files().list()
-                        .setQ(query)
-                        .setSpaces("drive") //
-                        .setFields("nextPageToken, files(id, name)")//
-                        .setPageToken(pageToken).execute();
-                list.addAll(result.getFiles());
-                pageToken = result.getNextPageToken();
-            } while (pageToken != null);
-            String folderId = list.get(0).getId();
+                do {
+                    FileList result = service.files().list()
+                            .setQ(query)
+                            .setSpaces("drive") //
+                            .setFields("nextPageToken, files(id, name)")//
+                            .setPageToken(pageToken).execute();
+                    list.addAll(result.getFiles());
+                    pageToken = result.getNextPageToken();
+                } while (pageToken != null);
+                String folderId = list.get(0).getId();
 
-            File fileMetadata = new File();
-            fileMetadata.setName(savedClient.getClientId() + ".jpg");
-            fileMetadata.setParents(Collections.singletonList(folderId));
+                File fileMetadata = new File();
+                fileMetadata.setName(savedClient.getClientId() + ".jpg");
+                fileMetadata.setParents(Collections.singletonList(folderId));
 
-            byte[] imageBytes = Base64.getDecoder().decode(imageIn64);
-            java.io.File filePath = java.io.File.createTempFile("newFile", ".jpg");
-            FileOutputStream fos = new FileOutputStream(filePath);
-            fos.write(imageBytes);
-            fos.close();
+                byte[] imageBytes = Base64.getDecoder().decode(imageIn64);
+                java.io.File filePath = java.io.File.createTempFile("newFile", ".jpg");
+                FileOutputStream fos = new FileOutputStream(filePath);
+                fos.write(imageBytes);
+                fos.close();
 
-            FileContent mediaContent = new FileContent("image/jpeg", filePath);
-            File file = service.files().create(fileMetadata, mediaContent)
-                    .setFields("id")
-                    .execute();
-            System.out.println("File ID: " + file.getId());
-
-            // The id of the newly posted image gets saved in our database
-            newClient.setProfileImage(file.getId());
+                FileContent mediaContent = new FileContent("image/jpeg", filePath);
+                File file = service.files().create(fileMetadata, mediaContent)
+                        .setFields("id")
+                        .execute();
+                System.out.println("File ID: " + file.getId());
+                // The id of the newly posted image gets saved in our database
+                newClient.setProfileImage(Long.toString(client.get().getClientId()));
+            }
             savedClient.update(newClient);
             clientRepository.save(savedClient);
         } else {
