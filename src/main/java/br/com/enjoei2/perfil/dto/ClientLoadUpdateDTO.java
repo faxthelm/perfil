@@ -41,6 +41,7 @@ public class ClientLoadUpdateDTO {
         this.cep = client.getCep();
         this.streetName = client.getStreetName();
         this.addressNumber = client.getAddressNumber();
+        this.neighborhood = client.getNeighborhood();
         this.complement = client.getComplement();
         this.state = client.getState();
         this.city = client.getCity();

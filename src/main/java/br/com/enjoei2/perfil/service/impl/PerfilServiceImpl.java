@@ -104,7 +104,7 @@ public class PerfilServiceImpl implements IPerfilService {
             }
             return savedClient;
         } else {
-            throw new NoSuchElementException("Element with userID " + userIdOrMail + "does not exist.");
+            throw new NoSuchElementException("Element with userID " + userIdOrMail + " does not exist.");
         }
     }
 

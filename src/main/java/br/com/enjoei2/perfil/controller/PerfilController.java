@@ -42,35 +42,20 @@ public class PerfilController {
 	// Returns the image as a Base64 string.
 	@ApiOperation(value = "Retorna os dados do cliente especificado por id")
 	@GetMapping("/{id}")
-	public @ResponseBody ClientReducedDTO retrieveClient(@PathVariable("id") Long userId) {
-        try {
+	public @ResponseBody ClientReducedDTO retrieveClient(@PathVariable("id") Long userId) throws Exception {
             return perfilService.retrieveClient(userId);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
 	@ApiOperation(value = "Retorna os dados do cliente especificado pelo seu email")
 	@GetMapping("/email/{email}")
-	public @ResponseBody ClientReducedDTO retrieveClient(@PathVariable("email") String email) {
-        try {
+	public @ResponseBody ClientReducedDTO retrieveClient(@PathVariable("email") String email) throws Exception {
             return perfilService.retrieveClientByEmail(email);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
 	@ApiOperation(value = "Atualiza os dados do perfil de id passado")
 	@PutMapping("/{id}")
-	public @ResponseStatus ResponseEntity<Object> updateClient(@RequestBody Client client, @PathVariable("id") Long userId){
-        try {
+	public @ResponseStatus ResponseEntity<Object> updateClient(@RequestBody Client client, @PathVariable("id") Long userId) throws Exception {
             perfilService.updateClient(Optional.of(client), userId);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
         return new ResponseEntity<>(HttpStatus.OK);
 	}
 

@@ -1,5 +1,6 @@
 package br.com.enjoei2.perfil.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Table;
 
 import javax.persistence.Column;
@@ -82,6 +83,7 @@ public class Client {
 	@Column(name = "shoe_size")
 	private int shoeSize;
 
+	@JsonIgnore
 	@Column(name = "recovery_token")
 	private String recoveryToken;
 
@@ -345,6 +347,8 @@ public class Client {
 		if (this.state != null) {
 			if (!this.state.equals(newClient.getState()) && newClient.getState() != null)
 				this.setState(newClient.getState());
+		} else {
+			this.setState(newClient.getState());
 		}
 		if (this.city != null) {
 			if (!this.city.equals(newClient.getCity()) && newClient.getCity() != null)

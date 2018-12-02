@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.util.NoSuchElementException;
+
 @ControllerAdvice
 public class CustomRestExceptionHandler {
 
@@ -31,5 +33,12 @@ public class CustomRestExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiErrorFieldResponse handleEmailAlreadyInUseException(final EmailAlreadyInUseException exception) {
         return new ApiErrorFieldResponse(new ErrorFieldResponse("email:", exception.getMessage()));
+    }
+
+    @ResponseBody
+    @ExceptionHandler(value = NoSuchElementException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiErrorFieldResponse handleNoSuchElementException(final NoSuchElementException exception) {
+        return new ApiErrorFieldResponse(new ErrorFieldResponse("id", exception.getMessage()));
     }
 }
