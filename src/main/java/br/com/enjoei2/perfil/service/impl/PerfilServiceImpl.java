@@ -121,7 +121,7 @@ public class PerfilServiceImpl implements IPerfilService {
     }
 
     @Override
-    public void updateClient(Optional<Client> client, Long userId) throws Exception {
+    public Client updateClient(Optional<Client> client, Long userId) throws Exception {
         Optional savedClientOptional = clientRepository.findById(userId);
         if (client.isPresent() && savedClientOptional.isPresent()) {
             Client newClient = client.get();
@@ -174,6 +174,7 @@ public class PerfilServiceImpl implements IPerfilService {
             }
             savedClient.update(newClient);
             clientRepository.save(savedClient);
+            return savedClient;
         } else {
             throw new NoSuchElementException("Either a user with userId "
                     + userId + " does not exist or you are calling this function without providing a new client.");

@@ -4,7 +4,7 @@ import br.com.enjoei2.perfil.dto.ClientLoadUpdateDTO;
 import br.com.enjoei2.perfil.dto.ClientReducedDTO;
 import br.com.enjoei2.perfil.dto.ClientRegisterDTO;
 import br.com.enjoei2.perfil.model.Client;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+//import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.Optional;
 
@@ -12,7 +12,7 @@ public interface IPerfilService {
 
 	void registerClient(ClientRegisterDTO clientRegisterDTO);
 	
-	void updateClient(Optional<Client> client, Long userId) throws Exception;
+	Client updateClient(Optional<Client> client, Long userId) throws Exception;
 	
 	void removeClient(Long userId);
 	
