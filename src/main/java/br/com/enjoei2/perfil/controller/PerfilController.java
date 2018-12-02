@@ -64,9 +64,9 @@ public class PerfilController {
 
 	@ApiOperation(value = "Atualiza os dados do perfil de id passado")
 	@PutMapping("/{id}")
-	public @ResponseStatus ResponseEntity<Object> updateClient(@RequestBody Optional<Client> client, @PathVariable("id") Long userId){
+	public @ResponseStatus ResponseEntity<Object> updateClient(@RequestBody Client client, @PathVariable("id") Long userId){
         try {
-            perfilService.updateClient(client, userId);
+            perfilService.updateClient(Optional.of(client), userId);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
