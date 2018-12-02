@@ -126,6 +126,7 @@ public class PerfilServiceImpl implements IPerfilService {
         if (client.isPresent() && savedClientOptional.isPresent()) {
             Client newClient = client.get();
             Client savedClient = (Client) savedClientOptional.get();
+	    String oldImage = savedClient.getProfileImage();
             String imageIn64 = newClient.getProfileImage();
             if(imageIn64 != null) {
                 // Post the image to google drive using their api, retrieve the link for access
@@ -135,6 +136,14 @@ public class PerfilServiceImpl implements IPerfilService {
                 Drive service = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
                         .setApplicationName(APPLICATION_NAME)
                         .build();
+
+		if (oldImage != null) {
+		    try{
+			service.files().delete(oldImage).execute();
+		    } catch (IOException e) {
+		        System.out.println("It seems like the old image was deleted. Oh well.\n" + e);
+		    }
+		}
 
                 String pageToken = null;
                 List<File> list = new LinkedList<>();
