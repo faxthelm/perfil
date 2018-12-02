@@ -170,7 +170,7 @@ public class PerfilServiceImpl implements IPerfilService {
                         .execute();
                 System.out.println("File ID: " + file.getId());
                 // The id of the newly posted image gets saved in our database
-                newClient.setProfileImage(Long.toString(client.get().getClientId()));
+                newClient.setProfileImage(file.getId());
             }
             savedClient.update(newClient);
             clientRepository.save(savedClient);
