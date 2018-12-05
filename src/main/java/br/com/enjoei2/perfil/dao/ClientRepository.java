@@ -14,4 +14,7 @@ public interface ClientRepository extends CrudRepository<Client, Long>{
     @Query("select c from Client c where c.email=:email")
     public Optional<Client> findByEmail(@Param("email") String email);
 
+    @Query("select c from Client c where c.cpf=:cpf")
+    public Optional<Client> findByCPF(@Param("cpf") String email);
+
 }

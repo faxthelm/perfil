@@ -1,6 +1,7 @@
 package br.com.enjoei2.perfil.service.impl;
 
 import br.com.enjoei2.perfil.dto.ClientLoadUpdateDTO;
+import br.com.enjoei2.perfil.exceptions.BadRequestException;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -114,10 +115,13 @@ public class PerfilServiceImpl implements IPerfilService {
     @Override
     public void registerClient(ClientRegisterDTO clientRegisterDTO) {
         Client client = clientRegisterDTO.transformToClient();
-        if (!clientRepository.findByEmail(client.getEmail()).isPresent())
+        if (!clientRepository.findByEmail(client.getEmail()).isPresent() && !clientRepository.findByCPF(client.getCpf()).isPresent())
             clientRepository.save(client);
+        else if(clientRepository.findByCPF(client.getCpf()).isPresent())
+            throw new BadRequestException("cpf", "cpf cadastrado já está em uso");
         else
-            throw new EmailAlreadyInUseException(client.getEmail());
+            throw new BadRequestException("email", "email cadastrado já está em uso");
+
     }
 
     @Override
