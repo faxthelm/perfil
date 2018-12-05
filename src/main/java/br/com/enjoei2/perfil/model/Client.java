@@ -304,8 +304,6 @@ public class Client {
 			this.setEmail(newClient.getEmail());
 		if (!this.password.equals(newClient.getPassword()) && newClient.getPassword() != null)
 			this.setPassword(newClient.getPassword());
-		if (!this.cpf.equals(newClient.getCpf()) && newClient.getCpf() != null)
-			this.setCpf(newClient.getCpf());
 		if (!this.ddd.equals(newClient.getDdd()) && newClient.getDdd() != null)
 			this.setDdd(newClient.getDdd());
 		if (!this.phone.equals(newClient.getPhone()) && newClient.getPhone() != null)

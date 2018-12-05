@@ -1,7 +1,6 @@
 package br.com.enjoei2.perfil.exceptions.configuration;
 
 import br.com.enjoei2.perfil.exceptions.BadRequestException;
-import br.com.enjoei2.perfil.exceptions.EmailAlreadyInUseException;
 import br.com.enjoei2.perfil.exceptions.InternalServerErrorException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -26,13 +25,6 @@ public class CustomRestExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiErrorFieldResponse handleInternalServerErrorException(final InternalServerErrorException exception) {
         return new ApiErrorFieldResponse(new ErrorFieldResponse("error:", exception.getMessage()));
-    }
-
-    @ResponseBody
-    @ExceptionHandler(value = EmailAlreadyInUseException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ApiErrorFieldResponse handleEmailAlreadyInUseException(final EmailAlreadyInUseException exception) {
-        return new ApiErrorFieldResponse(new ErrorFieldResponse("email:", exception.getMessage()));
     }
 
     @ResponseBody
